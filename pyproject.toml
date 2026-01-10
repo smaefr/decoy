@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decoy"
+version = "0.1.0"
+description = "Automated honeypot: emulated HTTP login, SSH identification banner, signature scoring, and SQLite telemetry."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "smae" }]
+keywords = ["honeypot", "telemetry", "security"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[project.scripts]
+decoy = "decoy.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/smae/decoy"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+filterwarnings = [
+  "ignore::ResourceWarning",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["decoy"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+skip_empty = true
