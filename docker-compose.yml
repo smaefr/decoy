@@ -1,0 +1,17 @@
+services:
+  decoy:
+    build: .
+    ports:
+      - "8080:8080"
+      - "2222:2222"
+    environment:
+      DECOY_BIND: "0.0.0.0"
+      DECOY_HTTP_PORT: "8080"
+      DECOY_SSH_PORT: "2222"
+      DECOY_DB: /data/decoy.db
+    volumes:
+      - decoy-data:/data
+    restart: unless-stopped
+
+volumes:
+  decoy-data:
