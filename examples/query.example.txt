@@ -1,0 +1,11 @@
+# Example operator workflow after decoy serve has recorded probes.
+
+decoy query --min-score 20 --limit 10
+
+    id score proto src                   path                     reasons
+------------------------------------------------------------------------------
+     4    45 http  203.0.113.10:51234    /login                   common_username,common_password,scanner_user_agent
+     3    25 http  203.0.113.10:51233    /../../etc/passwd        path_traversal,missing_user_agent
+     2     5 ssh   198.51.100.7:44122                             ssh_probe
+
+decoy query --proto ssh --json --limit 1
